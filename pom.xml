@@ -2,6 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.4.2</version>
+        <relativePath/>
+    </parent>
 
     <groupId>pers.haoyang.monsoon</groupId>
     <artifactId>monsoon</artifactId>
@@ -11,34 +17,72 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>monsoon-knowledge</module>
-        <module>monsoon-member</module>
+        <!--        工具类模块，所有的模块都可以依赖与它-->
+        <module>common-utils</module>
+        <!--        service服务的base包，包含service服务的公共配置类，所有的service模块依赖于它-->
+        <module>service-base</module>
+        <!--        认证与授权模块，需要认证授权的service服务依赖于它-->
+        <module>spring-security</module>
+        <!--        用户权限api接口服务（用户管理，角色管理和权限管理等）-->
+        <module>service-acl</module>
+        <!--        知识相关的api接口服务-->
+        <module>service-knowledge</module>
+        <!--        阿里云oss api接口服务-->
+        <module>service-oss</module>
+        <!--        用户api接口服务-->
+        <module>service-member</module>
+        <!--        统计报表api接口服务-->
+        <module>service-statistics</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <java.source>1.8</java.source>
+        <mysql.version>8.0.31</mysql.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <mybatis.version>3.0.0</mybatis.version>
+        <druid.version>1.2.15</druid.version>
+        <swagger.version>3.0.0</swagger.version>
+        <jodatime.version>2.9.9</jodatime.version>
+        <poi.version>5.2.3</poi.version>
+        <commons-fileupload.version>1.2.2</commons-fileupload.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <commons-configuration2.version>2.7</commons-configuration2.version>
+        <commons-dbutils.version>1.7</commons-dbutils.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <gson.version>2.8.5</gson.version>
+        <fastjson.version>2.0.20</fastjson.version>
+        <json.version>20220924</json.version>
+        <jwt.version>0.11.5</jwt.version>
+        <aliyun-java-sdk-core.version>4.5.10</aliyun-java-sdk-core.version>
+        <aliyun-sdk-oss.version>3.16.0</aliyun-sdk-oss.version>
+        <aliyun-java-sdk-vod.version>2.15.12</aliyun-java-sdk-vod.version>
+        <aliyun-java-vod-upload.version>1.4.15</aliyun-java-vod-upload.version>
+        <aliyun-sdk-vod-upload.version>1.4.15</aliyun-sdk-vod-upload.version>
+        <lombok.version>1.18.22</lombok.version>
+        <httpclient5.version>5.1.4</httpclient5.version>
+        <quartz.version>2.3.2</quartz.version>
+        <shiro.version>1.10.1</shiro.version>
+        <qiniu.version>7.11.0</qiniu.version>
+        <cloud-alibaba.version>2021.1</cloud-alibaba.version>
+        <cloud.version>2020.0.1</cloud.version>
     </properties>
 
     <!-- 子模块继承之后，提供作用：
     锁定版本+子modlue不用写groupId和version -->
     <dependencyManagement>
         <dependencies>
-            <!--spring boot 2.7.5-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.7.5</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <!--spring cloud 2021.0.5-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>2021.0.5</version>
+                <version>${cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -46,9 +90,226 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2021.1</version>
+                <version>${cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.baomidou</groupId>-->
+<!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--                <version>3.5.2</version>-->
+<!--            </dependency>-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--        swagger3-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--        日期时间管理工具-->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${jodatime.version}</version>
+            </dependency>
+            <!--        xls-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <!--        xlsx-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <!--        commons依赖-->
+            <!--        文件上传-->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+            <!--            供一些基础的、通用的操作和处理-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <!--            提供了一个工具类 org.apache. commons .io.IOUtils，封装了大量IO读写操作的代码-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!--            自动重新加载配置文件、监听器、处理器、自定义检测器-->
+            <!--            提供的一个通用的配置文件管理接口-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-configuration2</artifactId>
+                <version>${commons-configuration2.version}</version>
+            </dependency>
+            <!--            一个开源 JDBC工具类库-->
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>${commons-dbutils.version}</version>
+            </dependency>
+            <!--            用于摘要运算、编码解码的包-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+
+            <!--        gson-->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+            <!--        fastjson-->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!--        json-->
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${json.version}</version>
+            </dependency>
+            <!--            提供端到端的JWT创建和验证的Java库,轻量级认证规范-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+
+            <!--        aliyun-->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${aliyun-java-sdk-core.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>com.google.code.gson</groupId>
+                        <artifactId>gson</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpclient</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-vod</artifactId>
+                <version>${aliyun-java-sdk-vod.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-vod-upload</artifactId>
+                <version>${aliyun-java-vod-upload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-sdk-vod-upload</artifactId>
+                <version>${aliyun-sdk-vod-upload.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!--            用于构建任何需要进行 HTTP 协议处理的应用程序-->
+            <dependency>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>${httpclient5.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+
+            <!--        开源作业调度框架-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--            权限控制，安全框架-->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <!--            七牛云-->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -58,7 +319,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.5</version>
+                <version>2.4.2</version>
                 <configuration>
                     <fork>true</fork>
                     <addResources>true</addResources>
@@ -66,4 +327,28 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

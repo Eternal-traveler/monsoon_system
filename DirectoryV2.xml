@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <trees>
+     <tree path="/common-utils" title="工具类模块"/>
+     <tree path="/spring-security" title="认证授权模块"/>
+     <tree path="/service-acl" title="用户权限api接口服务"/>
+     <tree path="/service-knowledge" title="知识相关的api接口服务"/>
+     <tree path="/service-member" title="用户api接口服务"/>
+     <tree path="/service-statistics" title="统计报表api接口服务"/>
+     <tree path="/service-oss" title="阿里云oss api接口服务"/>
+     <tree path="/service-base" title="service服务的base包"/>
+     <tree path="/common-utils/src/main/java/pers/haoyang/monsoon/utils/PageUtils.java" title="分页工具类" extension="java"/>
+ </trees>
