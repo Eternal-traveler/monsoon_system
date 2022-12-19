@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.haoyang.monsoon.service.knowledge.dao.ResourceDao">
+
+    <!--    可根据自己的需求，是否要使用-->
+    <resultMap id="BaseResultMap" type="pers.haoyang.monsoon.service.knowledge.entity.ResourceEntity">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="resource_type_id" jdbcType="BIGINT" property="resourceTypeId" />
+        <result column="integral" jdbcType="INTEGER" property="integral" />
+        <result column="summary" jdbcType="VARCHAR" property="summary" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="link" jdbcType="VARCHAR" property="link" />
+        <result column="link_password" jdbcType="VARCHAR" property="linkPassword" />
+        <result column="is_hot" jdbcType="TINYINT" property="isHot" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="failed_reason" jdbcType="VARCHAR" property="failedReason" />
+        <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+        <result column="is_link_useful" jdbcType="TINYINT" property="isLinkUseful" />
+        <result column="click_count" jdbcType="INTEGER" property="clickCount" />
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, resource_name, user_id, resource_type_id, summary, content, link, link_password, is_hot,
+        status, failed_reason, audit_time, is_link_useful, click_count, gmt_create, gmt_modified
+    </sql>
+
+<!--    新增资源信息-->
+    <insert id="insertResource" parameterType="pers.haoyang.monsoon.service.knowledge.entity.ResourceEntity">
+        INSERT INTO monsoon_knowledge.knowledge_resource
+        (id, resource_name, user_id, resource_type_id, integral, summary, content, link, link_password, is_hot, status,
+            failed_reason, audit_time, is_link_useful, click_count)
+        VALUES(
+            #{id,jdbcType=BIGINT},
+            #{resourceName,jdbcType=VARCHAR},
+            #{userId,jdbcType=BIGINT},
+            #{resourceTypeId,jdbcType=BIGINT},
+            #{integral,jdbcType=INTEGER},
+            #{summary,jdbcType=VARCHAR},
+            #{content,jdbcType=VARCHAR},
+            #{link,jdbcType=VARCHAR},
+            #{linkPassword,jdbcType=VARCHAR},
+            #{isHot,jdbcType=INTEGER},
+            #{status,jdbcType=INTEGER},
+            #{failedReason,jdbcType=VARCHAR},
+            #{auditTime,jdbcType=TIMESTAMP},
+            #{isLinkUseful,jdbcType=INTEGER},
+            #{clickCount,jdbcType=INTEGER} )
+    </insert>
+
+<!--    通过输入id查询资源信息-->
+    <delete id="deleteResourceByIds" parameterType="Long">
+        delete from monsoon_knowledge.knowledge_resource
+        WHERE id IN
+            <foreach collection="array" item="id" separator="," open="(" close=")">
+                #{id,jdbcType=BIGINT}
+            </foreach>
+    </delete>
+
+<!--    通过查询id，查询返回的资源信息对象-->
+    <select id="selectResourceById" resultMap="BaseResultMap" parameterType="Long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM monsoon_knowledge.knowledge_resource
+            WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+</mapper>

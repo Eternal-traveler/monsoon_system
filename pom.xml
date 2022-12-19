@@ -67,6 +67,7 @@
         <aliyun-sdk-vod-upload.version>1.4.15</aliyun-sdk-vod-upload.version>
         <lombok.version>1.18.22</lombok.version>
         <httpclient5.version>5.1.4</httpclient5.version>
+        <httpcore5.version>5.1.5</httpcore5.version>
         <quartz.version>2.3.2</quartz.version>
         <shiro.version>1.10.1</shiro.version>
         <qiniu.version>7.11.0</qiniu.version>
@@ -94,16 +95,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+<!--            mybaits-->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.baomidou</groupId>-->
-<!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--                <version>3.5.2</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
@@ -272,6 +274,11 @@
                         <artifactId>slf4j-api</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents.core5</groupId>
+                <artifactId>httpcore5</artifactId>
+                <version>${httpcore5.version}</version>
             </dependency>
 
 

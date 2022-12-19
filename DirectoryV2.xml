@@ -9,4 +9,9 @@
      <tree path="/service-oss" title="阿里云oss api接口服务"/>
      <tree path="/service-base" title="service服务的base包"/>
      <tree path="/common-utils/src/main/java/pers/haoyang/monsoon/utils/PageUtils.java" title="分页工具类" extension="java"/>
- </trees>
+     <tree path="/common-utils/src/main/java/pers/haoyang/monsoon/utils/ReturnData.java" title="返回状态数据工具类"
+           extension="java"/>
+    <tree path="/common-utils/src/main/java/pers/haoyang/monsoon/xss" title="安全防护模块"/>
+    <tree path="/common-utils/src/main/java/pers/haoyang/monsoon/xss/SqlFilter.java" title="SQL过滤类" extension="java"/>
+    <tree path="/common-utils/src/main/java/pers/haoyang/monsoon/xss/HTMLFilter.java" title="HTML标签过滤类" extension="java"/>
+</trees>

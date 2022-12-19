@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.haoyang.monsoon.service.member.dao.StatisticsInfoDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pers.haoyang.monsoon.service.member.entity.StatisticsInfoEntity" id="statisticsInfoMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="resourceCount" column="resource_count"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="draftCount" column="draft_count"/>
+        <result property="loginCount" column="login_count"/>
+        <result property="attendCount" column="attend_count"/>
+        <result property="likeCount" column="like_count"/>
+        <result property="fansCount" column="fans_count"/>
+        <result property="collectResourceCount" column="collect_resource_count"/>
+        <result property="collectCommentCount" column="collect_comment_count"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.haoyang.monsoon.service.member.dao.IntegralChangeHistoryDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pers.haoyang.monsoon.service.member.entity.IntegralChangeHistoryEntity" id="integralChangeHistoryMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="changeCount" column="change_count"/>
+        <result property="note" column="note"/>
+        <result property="integralSourceType" column="integral_source_type"/>
+        <result property="gmtCreate" column="gmt_create"/>
+        <result property="gmtModified" column="gmt_modified"/>
+    </resultMap>
+
+
+</mapper>
