@@ -33,6 +33,8 @@
         <module>service-member</module>
         <!--        统计报表api接口服务-->
         <module>service-statistics</module>
+<!--        网关服务-->
+        <module>service-gateway</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->

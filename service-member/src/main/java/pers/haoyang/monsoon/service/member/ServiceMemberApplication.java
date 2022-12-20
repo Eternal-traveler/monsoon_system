@@ -9,6 +9,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author haoyang
+ * 1、spring-session依赖
+ * 2、spring-session配置
+ * 3、LoginInterceptor拦截器
  */
 
 @EnableFeignClients(basePackages = "pers.haoyang.monsoon.service.member.feign")

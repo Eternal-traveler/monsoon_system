@@ -1,0 +1,10 @@
+#优先级比application.properties高
+spring:
+  application:
+    #    对应nacos里的配置文件名
+    name: service-member
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml  # 指定配置文件为yaml格式

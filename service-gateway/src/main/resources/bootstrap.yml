@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        namespace: c249a0d8-c7fa-42f9-a67e-9663be02e0d5
